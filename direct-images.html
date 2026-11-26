@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+         #container{
+            background-color: aqua;
+            height: 100%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        img{
+            width: 400px;
+            height: 400px;
+            margin: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <button onclick="GetImages()">Get Images</button>
+    <div id="container"></div>
+
+    <script>
+        let accessKey = "0LK-BduiHAs13SmO4Sv67Pc6Or-9GZi3g0i5wMOBsn4"
+        
+   async function GetImages(){
+const container = document.getElementById("container")
+        container.innerHTML = ''
+        const res = await fetch(`https://api.unsplash.com/photos/random?client_id=${accessKey}&count=24`)
+        const data = await res.json()
+        console.log(data)
+
+        data.map((item)=> {
+           const img = document.createElement("img")
+           img.src = `${item.urls.regular}`
+           container.appendChild(img)
+        })
+        
+
+    }
+</script>
+</body>
+</html>
